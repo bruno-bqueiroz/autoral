@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { Charts } from "../Grafico1";
 
 export default function Sidebar(){
     return (
         <Container>
                 <b>Extrato semanal</b>
                 <span>
-                    <img src="https://venngage-wordpress.s3.amazonaws.com/uploads/2021/09/ed8e678d-f7b7-43f4-ab4d-ce34c6bc4f70.png" alt="grafico de pizza"/>
+                    <Charts/>
                 </span>
         </Container>
     )
@@ -30,13 +31,9 @@ const Container = styled.div`
     span{
         margin-top: 5vh;
         width:  90%;
-        height: 80%;
+        height: 40%;
         background-color: #e4e4e5;
         border: solid 1px #a6afaa;
         border-radius: 10px;
-        img{
-            width: 99%;
-            height: auto;
-        }
     }
 `
