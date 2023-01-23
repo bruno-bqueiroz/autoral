@@ -13,7 +13,7 @@ export default function RedirectButtons(){
 }
 
 const Container = styled.span`
-    width: 65%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
