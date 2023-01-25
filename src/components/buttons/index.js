@@ -4,7 +4,7 @@ export default function RedirectButtons(){
     return (
         <>
             <Container>
-                <a href="/home" >Home</a>
+                <a href="/" >Home</a>
                 <a href="/resumo">Resumo</a>
                 <a href="/cadastro">Cadastro</a>
             </Container>

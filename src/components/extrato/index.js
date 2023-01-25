@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { AiFillFolderAdd } from 'react-icons/ai';
+import { useState } from "react";
+import DatePicker from "react-datepicker";
 
-export default function ResumoDiario(){
-    
+import "react-datepicker/dist/react-datepicker.css";
+
+export default function ResumoDiario(){ 
+    const [startDate, setStartDate] = useState(new Date());
     return (
         <Container>
             <span>
@@ -18,7 +22,9 @@ export default function ResumoDiario(){
                     <p>Falta para bater a meta</p>
                     <b>R$ 699,00</b>
                 </ul>
-                <ul><b>Calendar</b></ul>
+                <ul>
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                </ul>
             </span>
             <span>
                 <div>

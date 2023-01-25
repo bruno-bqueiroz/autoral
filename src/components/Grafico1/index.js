@@ -6,7 +6,7 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend,np
+  Legend
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
@@ -27,13 +27,13 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Bar Chart',
+      text: 'Entradas da semana 02/10/2022 - 08/10/2022',
     },
   },
 };
 
 const labels = ['Segunda' , 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
-const entrada = [250, 155, 201, 0, 320, 330, 200]
+
 export const data = {
   labels,
   datasets: [

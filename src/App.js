@@ -4,15 +4,16 @@ import {
   Route
 } from 'react-router-dom';
 import Home from './pages/Home/index'
-
+import MonthlyStatement from './pages/MonthlyStatement';
+import Enrollment from './pages/Enrollments';
 function App() {
   return (
    <>
     <Router>
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/resumo" element={<Home />} />
-        <Route path="/cadastro" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/resumo" element={<MonthlyStatement />} />
+        <Route path="/cadastro" element={<Enrollment />} />
       </Routes>
     </Router>
    </>
