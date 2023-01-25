@@ -2,11 +2,9 @@ import styled from "styled-components";
 import Page from "../../components/Page";
 import RedirectButtons from "../../components/buttons";
 import Logo from "../../components/logo";
-import ResumoDiario from "../../components/extrato";
-import Sidebar from "../../components/sidebar";
+import { Charts } from "../../components/Grafico1";
 
-
-export default function Home(){
+export default function MonthlyStatement(){
     return (
         <>
         <Page>
@@ -17,8 +15,9 @@ export default function Home(){
                 </div>
             </Topo>
             <Corpo>
-                <ResumoDiario/>
-                <Sidebar/>
+                <div>
+                <Charts/>
+                </div>
             </Corpo>
 
         </Page>
@@ -46,20 +45,24 @@ const Corpo = styled.div`
     bottom: 0px;
     border: none;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: row ;
+    background-color: #f9f9f9;
 
     div:first-child {
-        height: 100%;
-        width: 65%;
-        border-right: 0.5px solid #f9f9f9;
-    }
-    div:last-child {
-        height: 100%;
-        width: 32%;
-        border-right: 0.5px solid #f9f9f9;
+        width: 80vw;
+        height: 75vh;
+        bottom: 0px;
+        border: solid 1px #f9f9f9;
+        border-radius: 10PX;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row ;
+        background-color: #e4e4e5;
         
     }
+    
     
 `
