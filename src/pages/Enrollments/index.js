@@ -3,12 +3,9 @@ import Page from "../../components/Page";
 import RedirectButtons from "../../components/buttons";
 import Logo from "../../components/logo";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
 
 export default function Enrollment(){
-    const [startDate, setStartDate] = useState(new Date());
+    
     return (
         <>
         <Page>
@@ -18,11 +15,9 @@ export default function Enrollment(){
                     <RedirectButtons/>
                 </div>
             </Topo>
+            <Corpo>
             
-            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                
-            
-
+            </Corpo>
         </Page>
         </>
     )
@@ -40,5 +35,23 @@ const Topo = styled.div`
         display: flex;
         border-top: 0.5px solid #f9f9f9;
         border-bottom: 0.5px solid #f9f9f9;
+    }
+`
+
+const Corpo = styled.div`
+    width: 100%;
+    height: 400px;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div{
+        width: 300px;
+        height: 300px;
+        display: flex;
+        background-color: blue;
+        align-items: center;
+        justify-content:center;
+        position: relative;
     }
 `

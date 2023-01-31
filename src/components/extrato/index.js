@@ -1,12 +1,29 @@
 import styled from "styled-components";
 import { AiFillFolderAdd } from 'react-icons/ai';
 import { useState } from "react";
-import DatePicker from "react-datepicker";
+import dayjs from 'dayjs';
+import axios from "axios";
 
-import "react-datepicker/dist/react-datepicker.css";
 
 export default function ResumoDiario(){ 
-    const [startDate, setStartDate] = useState(new Date());
+    const [date, setDate] = useState(dayjs().format('DD/MM/YYYY'));
+    const [data, setData] = useState([])
+    console.log(date)
+    
+
+        async function diario(date){
+            console.log('chamou')
+            console.log(date)
+            try {
+                const data = await axios.get(`http://localhost:5434/day?date=${date}`);
+                setData(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        console.log(data);
+    
+
     return (
         <Container>
             <span>
@@ -14,7 +31,7 @@ export default function ResumoDiario(){
                     <p>Meta do Mês</p>
                     <b>R$ 4.000,00</b>
                 </ul>
-                <ul>
+                <ul> 
                     <p>Faturamento</p>
                     <b>R$ 3.301,00</b>
                 </ul>
@@ -23,42 +40,44 @@ export default function ResumoDiario(){
                     <b>R$ 699,00</b>
                 </ul>
                 <ul>
-                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                    <form onInputCapture={()=> diario()}>
+                        <input type="date" value={date} placeholder={date} required onChange={e => setDate(e.target.value)} />
+                    </form>
                 </ul>
             </span>
             <span>
                 <div>
                     <p>SALDO</p>
-                    <b>R$ 281,00</b>
+                    <b>R$ {data.entrada - data.saida},00</b>
                     
                 </div>
                 <div>
                     <p>GASTOS</p>
-                    <b>R$ 120,00</b>
+                    <b>R$ {data.saida},00</b>
                 </div>
                 <div>
                     <p>FATUROU</p>
-                    <b>R$ 401,00</b>
+                    <b>R$ {data.entrada},00</b>
                 </div>
                 <div>
                     <p>P/ HORA</p>
-                    <b>R$ 36,45</b>
+                    <b>R$ {data.entrada / data.horasTrabalhadas},00</b>
                 </div>
                 <div>
                     <p>TEMPO</p>
-                    <b>11:02 hrs</b>
+                    <b>{data.horasTrabalhadas} hrs</b>
                 </div>
                 <div>
                     <p>KM RODADO</p>
-                    <b>226</b>
+                    <b>{data.KmPercorridos}</b>
                 </div>
                 <div>
                     <p>MÉDIA P/ KM</p>
-                    <b>R$ 1,77</b>
+                    <b>R$ {(data.entrada/data.KmPercorridos).toFixed(2)}</b>
                 </div>
                 <div>
                     <p>MÉDIA P/ VIAGEM</p>
-                    <b>R$ 13,79</b>
+                    <b>R$ {(data.entrada/data.NumeroViagens).toFixed(2)}</b>
                 </div>
                 <div><p>ENTRADA</p><b><AiFillFolderAdd/></b></div>
             </span>
@@ -77,7 +96,10 @@ const Container = styled.div`
         height: 15%;
         font-size: 1.5vw;
         display: flex;
-        color: #687b76;
+        color: #14121F;
+        
+        align-items: center;
+        justify-content: center;
         ul{
             margin: 2vh 15px;
         }
@@ -86,13 +108,32 @@ const Container = styled.div`
             
             font-weight: 500;
         }
+        ul:last-child{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2vh 0;
+            form{
+                input{
+                    background-color: #e0c5ff;
+                    color: #FFFFFF;
+                }
+                input:last-child{
+                    background-color: #14121F;
+                    color: #FFFFFF;
+                    border: solid 1px #FFFFFF;
+                    border-radius: 4px;
+                    margin-left: 4px;
+                }
+            }
+        }
         
     }
     span:last-child{
         width: 95%;
         height: 83%;
-        background-color: #f9f9f9;
-        border: solid #f9f9f9;
+        background-color: #FFFFFF;
+        border: solid #FFFFFF;
         border-radius: 10px;
         display: flex;
         flex-wrap: wrap;
@@ -102,10 +143,10 @@ const Container = styled.div`
             width: 10vw;
             height: 8vw;
             margin: 1vw 2vw;
-            background-color: #a6afaa;
-            border: solid 1px #e4e4e5;
+            background-color: #EBFDEF;
+            border: solid 1px #EBFDEF;
             border-radius: 5px;
-            color: #e4e4e5;
+            color: #14121F;
             font-size: 1vw;
             font-weight: 800;
             p{
@@ -113,15 +154,15 @@ const Container = styled.div`
             }   
             b{
                 font-size:2vw;
-                color: #687b76;
+                color: #14121F;
             }
         }
         div:last-child{
             width: 20vw;
             height: 8vw;
             margin: 1vw 2vw;
-            background-color: #e4e4e5;
-            color: #334c57;
+            background-color: #FFEFE7;
+            color: #14121F;
             font-size: 1.7vw;
             p{
                 margin: 1vw;
@@ -135,8 +176,8 @@ const Container = styled.div`
         position: relative;
         box-shadow: 
             0 0 0 1px #f9f9f9,
-            0 0 0 2px #e4e4e5,
-            0 0 3px 3px #a6afaa,
-            0 0 5px 5px #687b76;
+            0 0 0 2px #e0c5ff,
+            0 0 3px 3px #553e27,
+            0 0 5px 5px #6780f7;
     }
 `

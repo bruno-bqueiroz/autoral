@@ -3,3 +3,9 @@
 .color3 {color: #a6afaa;}
 .color4 {color: #e4e4e5;}
 .color5 {color: #f9f9f9;}
+
+.color1 {color: #1d1614;}
+.color2 {color: #553e27;}
+.color3 {color: #6780f7;} 
+.color4 {color: #e0c5ff;}
+.color5 {color: #ffffff;}
