@@ -2,50 +2,19 @@ import styled from "styled-components";
 import { AiFillFolderAdd } from 'react-icons/ai';
 import { useState } from "react";
 import dayjs from 'dayjs';
-import axios from "axios";
+import Meta from "./meta";
 
 
 export default function ResumoDiario(){ 
     const [date, setDate] = useState(dayjs().format('DD/MM/YYYY'));
     const [data, setData] = useState([])
-    console.log(date)
-    
-
-        async function diario(date){
-            console.log('chamou')
-            console.log(date)
-            try {
-                const data = await axios.get(`http://localhost:5434/day?date=${date}`);
-                setData(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        console.log(data);
-    
 
     return (
         <Container>
+            <Meta date = {date} setDate = {setDate} setData = {setData}/>
+            {!data? <span></span>:
             <span>
-                <ul>
-                    <p>Meta do Mês</p>
-                    <b>R$ 4.000,00</b>
-                </ul>
-                <ul> 
-                    <p>Faturamento</p>
-                    <b>R$ 3.301,00</b>
-                </ul>
-                <ul>
-                    <p>Falta para bater a meta</p>
-                    <b>R$ 699,00</b>
-                </ul>
-                <ul>
-                    <form onInputCapture={()=> diario()}>
-                        <input type="date" value={date} placeholder={date} required onChange={e => setDate(e.target.value)} />
-                    </form>
-                </ul>
-            </span>
-            <span>
+                
                 <div>
                     <p>SALDO</p>
                     <b>R$ {data.entrada - data.saida},00</b>
@@ -80,7 +49,7 @@ export default function ResumoDiario(){
                     <b>R$ {(data.entrada/data.NumeroViagens).toFixed(2)}</b>
                 </div>
                 <div><p>ENTRADA</p><b><AiFillFolderAdd/></b></div>
-            </span>
+            </span>}
         </Container>
     )
 }
@@ -91,44 +60,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    span:first-child{
-        width: 100%;
-        height: 15%;
-        font-size: 1.5vw;
-        display: flex;
-        color: #14121F;
-        
-        align-items: center;
-        justify-content: center;
-        ul{
-            margin: 2vh 15px;
-        }
-        p{
-            margin: 5px 0 0 0;
-            
-            font-weight: 500;
-        }
-        ul:last-child{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 2vh 0;
-            form{
-                input{
-                    background-color: #e0c5ff;
-                    color: #FFFFFF;
-                }
-                input:last-child{
-                    background-color: #14121F;
-                    color: #FFFFFF;
-                    border: solid 1px #FFFFFF;
-                    border-radius: 4px;
-                    margin-left: 4px;
-                }
-            }
-        }
-        
-    }
+    
     span:last-child{
         width: 95%;
         height: 83%;
