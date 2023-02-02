@@ -1,20 +1,27 @@
 import styled from "styled-components";
 import { AiFillFolderAdd } from 'react-icons/ai';
+import React from "react";
 import { useState } from "react";
 import dayjs from 'dayjs';
 import Meta from "./meta";
+import ModalStyle from "./modal/Modal";
 
 
 export default function ResumoDiario(){ 
+    
     const [date, setDate] = useState(dayjs().format('DD/MM/YYYY'));
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+    function openModal() {
+        setIsOpen(true);
+       }
 
     return (
         <Container>
+            <ModalStyle setDate = {setDate} modalIsOpen = {modalIsOpen} setIsOpen={setIsOpen} setData = {setData} />
             <Meta date = {date} setDate = {setDate} setData = {setData}/>
             {!data? <span></span>:
             <span>
-                
                 <div>
                     <p>SALDO</p>
                     <b>R$ {data.entrada - data.saida},00</b>
@@ -48,7 +55,7 @@ export default function ResumoDiario(){
                     <p>MÉDIA P/ VIAGEM</p>
                     <b>R$ {(data.entrada/data.NumeroViagens).toFixed(2)}</b>
                 </div>
-                <div><p>ENTRADA</p><b><AiFillFolderAdd/></b></div>
+                <div onClick={openModal}><p>ENTRADA</p><b><AiFillFolderAdd/></b></div>
             </span>}
         </Container>
     )

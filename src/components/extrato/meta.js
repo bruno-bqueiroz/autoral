@@ -9,7 +9,7 @@ export default function Meta({date, setDate, setData}){
             setData(datas);
 
     } catch (error) {
-            console.log(error);
+            alert(error);
     }
 }
 

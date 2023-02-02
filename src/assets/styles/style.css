@@ -8,3 +8,25 @@
 body {
   font-family: "Lexend Deca", sans-serif;
 }
+
+.Modal {
+  position: absolute;
+  top: 26vh;
+  left: 40vw; 
+  right: auto;
+  bottom: auto;
+  background-color: rgb(197, 255, 224);
+  width: 20vw;
+  height: 52vh;
+}
+
+.Overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: rebeccapurple;
+}
