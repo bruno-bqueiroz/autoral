@@ -25,13 +25,13 @@ const Container = styled.span`
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-size: 2vw;
         font-weight: 600;
-        color: #687b76;
+        color: #14121F;
         text-decoration: none;
         transition: 0.5s;
         opacity: 0.8;   
     }
     a:hover{
-        color: #334c57;
+        color: #1d1614; 
         opacity: 1; 
         
 

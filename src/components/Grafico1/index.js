@@ -39,13 +39,13 @@ export const data = {
   datasets: [
     {
       label: 'Entrada',
-      data: labels.map((v) =>  Math.floor(Math.random() * 200 + 100)),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      data: labels.map((v) =>  Math.floor(Math.random() * 200 + 150)),
+      backgroundColor: '#1d5c94',
     },
     {
       label: 'Saida',
       data: labels.map(() => Math.random() * 100 +50),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      backgroundColor: '#dfb89e',
     },
   ],
 };

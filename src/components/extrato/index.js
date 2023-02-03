@@ -1,67 +1,62 @@
 import styled from "styled-components";
 import { AiFillFolderAdd } from 'react-icons/ai';
+import React from "react";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
+import dayjs from 'dayjs';
+import Meta from "./meta";
+import ModalStyle from "./modal/Modal";
 
-import "react-datepicker/dist/react-datepicker.css";
 
 export default function ResumoDiario(){ 
-    const [startDate, setStartDate] = useState(new Date());
+    
+    const [date, setDate] = useState(dayjs().format('DD/MM/YYYY'));
+    const [data, setData] = useState([]);
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+    function openModal() {
+        setIsOpen(true);
+       }
+
     return (
         <Container>
-            <span>
-                <ul>
-                    <p>Meta do Mês</p>
-                    <b>R$ 4.000,00</b>
-                </ul>
-                <ul>
-                    <p>Faturamento</p>
-                    <b>R$ 3.301,00</b>
-                </ul>
-                <ul>
-                    <p>Falta para bater a meta</p>
-                    <b>R$ 699,00</b>
-                </ul>
-                <ul>
-                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                </ul>
-            </span>
+            <ModalStyle setDate = {setDate} modalIsOpen = {modalIsOpen} setIsOpen={setIsOpen} setData = {setData} />
+            <Meta date = {date} setDate = {setDate} setData = {setData}/>
+            {!data? <span></span>:
             <span>
                 <div>
                     <p>SALDO</p>
-                    <b>R$ 281,00</b>
+                    <b>R$ {data.entrada - data.saida},00</b>
                     
                 </div>
                 <div>
                     <p>GASTOS</p>
-                    <b>R$ 120,00</b>
+                    <b>R$ {data.saida},00</b>
                 </div>
                 <div>
                     <p>FATUROU</p>
-                    <b>R$ 401,00</b>
+                    <b>R$ {data.entrada},00</b>
                 </div>
                 <div>
                     <p>P/ HORA</p>
-                    <b>R$ 36,45</b>
+                    <b>R$ {data.entrada / data.horasTrabalhadas},00</b>
                 </div>
                 <div>
                     <p>TEMPO</p>
-                    <b>11:02 hrs</b>
+                    <b>{data.horasTrabalhadas} hrs</b>
                 </div>
                 <div>
                     <p>KM RODADO</p>
-                    <b>226</b>
+                    <b>{data.KmPercorridos}</b>
                 </div>
                 <div>
                     <p>MÉDIA P/ KM</p>
-                    <b>R$ 1,77</b>
+                    <b>R$ {(data.entrada/data.KmPercorridos).toFixed(2)}</b>
                 </div>
                 <div>
                     <p>MÉDIA P/ VIAGEM</p>
-                    <b>R$ 13,79</b>
+                    <b>R$ {(data.entrada/data.NumeroViagens).toFixed(2)}</b>
                 </div>
-                <div><p>ENTRADA</p><b><AiFillFolderAdd/></b></div>
-            </span>
+                <div onClick={openModal}><p>ENTRADA</p><b><AiFillFolderAdd/></b></div>
+            </span>}
         </Container>
     )
 }
@@ -72,27 +67,12 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    span:first-child{
-        width: 100%;
-        height: 15%;
-        font-size: 1.5vw;
-        display: flex;
-        color: #687b76;
-        ul{
-            margin: 2vh 15px;
-        }
-        p{
-            margin: 5px 0 0 0;
-            
-            font-weight: 500;
-        }
-        
-    }
+    
     span:last-child{
         width: 95%;
         height: 83%;
-        background-color: #f9f9f9;
-        border: solid #f9f9f9;
+        background-color: #FFFFFF;
+        border: solid #FFFFFF;
         border-radius: 10px;
         display: flex;
         flex-wrap: wrap;
@@ -102,10 +82,10 @@ const Container = styled.div`
             width: 10vw;
             height: 8vw;
             margin: 1vw 2vw;
-            background-color: #a6afaa;
-            border: solid 1px #e4e4e5;
+            background-color: #EBFDEF;
+            border: solid 1px #EBFDEF;
             border-radius: 5px;
-            color: #e4e4e5;
+            color: #14121F;
             font-size: 1vw;
             font-weight: 800;
             p{
@@ -113,15 +93,15 @@ const Container = styled.div`
             }   
             b{
                 font-size:2vw;
-                color: #687b76;
+                color: #14121F;
             }
         }
         div:last-child{
             width: 20vw;
             height: 8vw;
             margin: 1vw 2vw;
-            background-color: #e4e4e5;
-            color: #334c57;
+            background-color: #FFEFE7;
+            color: #14121F;
             font-size: 1.7vw;
             p{
                 margin: 1vw;
@@ -135,8 +115,8 @@ const Container = styled.div`
         position: relative;
         box-shadow: 
             0 0 0 1px #f9f9f9,
-            0 0 0 2px #e4e4e5,
-            0 0 3px 3px #a6afaa,
-            0 0 5px 5px #687b76;
+            0 0 0 2px #e0c5ff,
+            0 0 3px 3px #553e27,
+            0 0 5px 5px #6780f7;
     }
 `
