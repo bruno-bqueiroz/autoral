@@ -62,15 +62,10 @@ export default function ResumoDiario(){
 }
 
 const Container = styled.div`
-    font-size: 10px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
+    justify-content: center;
     span:last-child{
-        width: 95%;
-        height: 83%;
+        width: 100%;
+        height: 85%;
         background-color: #FFFFFF;
         border: solid #FFFFFF;
         border-radius: 10px;
@@ -82,7 +77,7 @@ const Container = styled.div`
             width: 10vw;
             height: 8vw;
             margin: 1vw 2vw;
-            background-color: #EBFDEF;
+            background-color: #a6afaa;
             border: solid 1px #EBFDEF;
             border-radius: 5px;
             color: #14121F;
@@ -100,7 +95,7 @@ const Container = styled.div`
             width: 20vw;
             height: 8vw;
             margin: 1vw 2vw;
-            background-color: #FFEFE7;
+            background-color: #FFDAB9;
             color: #14121F;
             font-size: 1.7vw;
             p{

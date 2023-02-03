@@ -17,6 +17,7 @@ export default function FormModal({setDate, setIsOpen, setData }){
       setIsOpen(false);
     }
     async function postDiary(e){
+        console.log(e)
          e.preventDefault();
          console.log(dataDate)
          try {

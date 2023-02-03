@@ -23,24 +23,19 @@ export default function Sidebar(){
 }
 
 const Container = styled.div`
-    margin-left: 1.5vw;
-    margin-top: 3vw;
-    width: 90%;
-    height: 85%;
-    background-color: #f9f9f9;
-    border: solid #f9f9f9;
-    border-radius: 10px;
+    width: 100%;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     b{  
-        margin-top: 5vh;
+        padding-top: 5vh;
         font-size: 2vw;
         color: #14121F;
     }
     span{
         margin-top: 5vh;
-        width:  90%;
+        width:  72%;
         height: 40%;
         background-color: #e4e4e5;
         border: solid 1px #a6afaa;
@@ -52,8 +47,8 @@ const Container = styled.div`
             width: 14vw;
             height: 10vw;
             margin: 1vw 2vw;
-            background-color: #EBFDEF;
-            border: solid 1px #EBFDEF;
+            background-color: #AFEEEE;
+            border: solid 1px #AFEEEE;
             border-radius: 5px;
             color: #14121F;
             font-size: 1.5vw;
@@ -73,8 +68,8 @@ const Container = styled.div`
             width: 14vw;
             height: 10vw;
             margin: 1vw 2vw;
-            background-color: #FFEFE7;
-            border: solid 1px #FFEFE7;
+            background-color: #FFDAB9;
+            border: solid 1px #FFDAB9;
             border-radius: 5px;
             color: #14121F;
             font-size: 1.5vw;

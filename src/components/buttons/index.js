@@ -13,7 +13,8 @@ export default function RedirectButtons(){
 }
 
 const Container = styled.span`
-    width: 100%;
+    width: auto;
+    margin-left: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,17 +22,17 @@ const Container = styled.span`
     
     a{  
         margin-right: 5vw;
-        margin-top: 3vh;
+        margin-top: -3.5vh;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size: 2vw;
+        font-size: 1.5vw;
         font-weight: 600;
-        color: #14121F;
+        color: white;
         text-decoration: none;
         transition: 0.5s;
         opacity: 0.8;   
     }
     a:hover{
-        color: #1d1614; 
+        color: gray; 
         opacity: 1; 
         
 
