@@ -11,13 +11,16 @@ body {
 
 .Modal {
   position: absolute;
-  top: 26vh;
-  left: 40vw; 
+  top: 20vh;
+  left: 37vw; 
   right: auto;
   bottom: auto;
-  background-color: rgb(197, 255, 224);
-  width: 20vw;
-  height: 52vh;
+  background-color: #14121F;
+  border: solid 1px #14121F;
+  color: aliceblue;
+  border-radius: 5px;
+  width: 25vw;
+  height: 60vh;
 }
 
 .Overlay {
@@ -30,3 +33,15 @@ body {
   transform: translate(-50%, -50%);
   background-color: rebeccapurple;
 }
+
+/* 
+    .toast.success('🦄 Wow so easy!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    }); */

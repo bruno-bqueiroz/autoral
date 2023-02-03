@@ -4,11 +4,24 @@ import RedirectButtons from "../../components/buttons";
 import Logo from "../../components/logo";
 import ResumoDiario from "../../components/extrato";
 import Sidebar from "../../components/sidebar";
+import { ToastContainer } from 'react-toastify';
 
 
 export default function Home(){
     return (
         <>
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
         <Page>
             <Topo>
                 <Logo/>

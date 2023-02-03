@@ -1,17 +1,18 @@
-import { customStyles } from "../../../assets/styles/modal";
 import styled from "styled-components";
 import { useState } from "react";
 import { PostDiaryBydate } from "../../../services/diary";
-
+import {  toast } from 'react-toastify';
+import { IoCloseSharp } from "react-icons/io5";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function FormModal({setDate, setIsOpen, setData }){
-    const [dataEntrada, setDataEntrada ] = useState(0);
-    const [dataSaida, setDataSaida ] = useState(0);
-    const [dataKM, setDataKM ] = useState(0);
-    const [dataTempo, setDataTempo ] = useState(0);
-    const [dataDate, setDataDate ] = useState(0);
-    const [dataNViagens, setDataNViagens ] = useState(0);
-    
+    const [dataEntrada, setDataEntrada ] = useState('');
+    const [dataSaida, setDataSaida ] = useState('');
+    const [dataKM, setDataKM ] = useState('');
+    const [dataTempo, setDataTempo ] = useState('');
+    const [dataDate, setDataDate ] = useState('');
+    const [dataNViagens, setDataNViagens ] = useState('');
+    const notify = () => toast("Sucesso!!!");
     function closeModal() {
       setIsOpen(false);
     }
@@ -19,17 +20,22 @@ export default function FormModal({setDate, setIsOpen, setData }){
          e.preventDefault();
          console.log(dataDate)
          try {
+            
              const datas = await PostDiaryBydate({dataEntrada, dataSaida, dataKM, dataTempo,dataNViagens, dataDate});
              setData(datas);
-             setDate(dataDate)
+             setDate(dataDate);
+             notify();
              closeModal();
+             
+             
          } catch (error) {
              console.log(error);
          }
     }
     return (
         <Container>
-        <button onClick={closeModal}>close</button>
+            
+        <button onClick={closeModal}><IoCloseSharp/></button>
         <form onSubmit={postDiary}>
             <div>
                 <label>Entrada</label>
@@ -55,7 +61,9 @@ export default function FormModal({setDate, setIsOpen, setData }){
                 <label>data</label>
                 <input type="date" value={dataDate} placeholder={'Data'} required onChange={e => setDataDate(e.target.value)}  />
             </div>
-            <input type="submit" value="Enviar" />
+            <div className="button">
+                <input type="submit" value="Enviar" />
+            </div>
         </form>
         </Container>
     )
@@ -65,25 +73,51 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     button{
-        margin-top: 1vh;
-        margin-left: 12vw;
+        height: 25px;
+        width: 22px;
+        padding: 0px;
+        font-size: 20px;
+        margin-top: -2.5vh;
+        margin-left: 25vw;
         margin-right: 1vw;
-        background-color: #e0c5ff;
-        border: solid 1px #e0c5ff;
+        background-color: inherit;
+        border: none;
         border-radius: 3px;
     }
-    div{
-        margin: 10px;
-        padding: 3px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        input{
+    form{
+        .button{
+            margin-left: 2.5vw;
+            margin-bottom: 1vh;
+            margin-top: 2.5vh;
             height: 35px;
-            width: 100px;
-            border: solid 1px #e0c5ff;
-            border-radius: 4px;
+            width: 20vw;
+            input{
+                width: 20vw;
+                color: #FFFFFF;
+                font-size: 1.3vw;
+                font-weight: 800;
+                background-color: #1d5c94;
+                border: solid #1d5c94;
+                
+            }
+        }
+        
+        div{
+            margin: 10px;
+            padding: 3px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            input{
+                height: 35px;
+                width: 100px;
+                border: solid 1px #e0c5ff;
+                border-radius: 4px;
+                background-color: #FFFFFF;
+            }
+            
         }
     }
+    
 `
