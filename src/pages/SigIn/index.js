@@ -19,7 +19,7 @@ export default function SigIn(){
           const userData = await signIn(email, password);
           console.log(userData);
           
-          toast('Login realizado com sucesso!');
+          toast('Login realizado com sucesso!!!');
           navigate('/dashboard');
         } catch (err) {
           toast('Não foi possível fazer o login!');
