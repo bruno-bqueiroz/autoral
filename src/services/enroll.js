@@ -1,6 +1,6 @@
 import api from './api';
 
-export async function postEnroll({form}) {
+export async function postEnroll(form) {
     const userId = 1;
     const response = await api.post(`/enroll?userId=${userId}`,[{
         "name": form.name,
@@ -16,3 +16,10 @@ export async function postEnroll({form}) {
       }]);
       return response.data;
   }
+
+  export async function getEnroll() {
+    const userId = 1;
+    const response = await api.get(`/enroll?userId=${userId}`);
+      return response.data;
+  }
+  

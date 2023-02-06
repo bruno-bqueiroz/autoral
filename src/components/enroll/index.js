@@ -2,35 +2,64 @@ import styled from "styled-components";
 import { useState } from "react";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { postEnroll, getEnroll } from "../../services/enroll";
+import { useEffect } from "react";
 
 export default function FormEnroll(){
-    const [form, setForm] = useState([]);
-    const [data, setData] = useState('');
+    const [form, setForm] = useState({
+        ano: "",
+        city: "",
+        cpf: "",
+        marca: "",
+        modelo: "",
+        name: "",
+        state: "",
+        });
+        async function get(){
+            try {
+                const dataEnroll = await getEnroll();
+                console.log(dataEnroll[0]);
+                setForm({
+                ano: dataEnroll[1].ano,
+                city: dataEnroll[0].city,
+                cpf: dataEnroll[0].cpf,
+                marca: dataEnroll[1].marca,
+                modelo: dataEnroll[1].modelo,
+                name: dataEnroll[0].name,
+                state: dataEnroll[0].state,
+                }); 
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        useEffect(() => {
+            console. log("Isso será executado uma vez!");
+            get();
+            }, []);
+    
+    console.log(form);
+    
+    
     const notify = () => toast("Sucesso!!!");
     const errorNotify = () => toast("Erro ao Salvar!");
     console.log(form)
 
       function handleForm (e) {
-        if(form.find(e.target.name)){
-            
-            setForm(
-                form.e.target.name = e.target.value)
-        }
         setForm({
           ...form,
           [e.target.name]: e.target.value,
-        }) 
+        })
       }
-      async function postEnroll(){
+      async function postWithEnroll(){
         try {
         const datas = await postEnroll(form);
-        setData(datas);
+        
+        console.log(datas)
         notify();
         } catch (error) {
             errorNotify();
             console.log(error);
         }
-        
       }
       
     return(
@@ -39,30 +68,33 @@ export default function FormEnroll(){
                 <h1>Cadastro pessoal</h1>
                 <form>
                     <b>Nome:</b>
-                    <input type="text" name="name" onChange={handleForm} value={form.description}  placeholder="Digite seu nome" required/>
+                    <input type="text" name="name" onChange={handleForm} value={form.name}  placeholder="Digite seu nome" required/>
                     <b>CPF:</b>
-                    <input type="text" name="cpf" onChange={handleForm} value={form.description}  placeholder="Digite seu CPF" required/>
+                    <input type="text" name="cpf" onChange={handleForm} value={form.cpf}  placeholder="Digite seu CPF" required/>
                     <b>Cidade:</b>
-                    <input type="text" name="city" onChange={handleForm} value={form.description}  placeholder="Digite a Cidade onde trabalha" required/>
+                    <input type="text" name="city" onChange={handleForm} value={form.city}  placeholder="Digite a Cidade onde trabalha" required/>
                     <b>Estado:</b>
-                    <input type="text" name="state" onChange={handleForm} value={form.description}  placeholder="Em qual estado fica essa cidade" required/>
+                    <input type="text" name="state" onChange={handleForm} value={form.state}  placeholder="Em qual estado fica essa cidade" required/>
                 </form>
             </Enroll>
             <Pipe></Pipe>
             <Vehicle>
                 <h1>Cadastro do Veículo</h1>
+                
                 <form >
                     <b>Marca:</b>
-                    <input type="text" name="marca" onChange={handleForm} value={form.description}  placeholder="Digite a Marca do Veículo" required/>
+                    <input type="text" name="marca" onChange={handleForm} value={form.marca}  placeholder="Digite a Marca do Veículo" required/>
                     <b>Modelo:</b>
-                    <input type="text" name="modelo" onChange={handleForm} value={form.description}  placeholder="Digite o Modelo do Veículo" required/>
+                    <input type="text" name="modelo" onChange={handleForm} value={form.modelo}  placeholder="Digite o Modelo do Veículo" required/>
                     <b>Ano:</b>
-                    <input type="text" name="ano" onChange={handleForm} value={form.description}  placeholder="Digite o ano de fabricação do veículo" required/>
+                    <input type="text" name="ano" onChange={handleForm} value={form.ano}  placeholder="Digite o ano de fabricação do veículo" required/>
                 </form>
-                <input onClick={postEnroll} type="submit" value="Enviar" className="submit"/>
                 
+                <input onClick={postWithEnroll} type={"submit"} value="Enviar" className="submit"/>
             </Vehicle>
+            
         </>
+        
     )
 }
 

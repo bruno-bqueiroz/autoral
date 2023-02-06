@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Page from "../../components/Page";
 import Logo from "../../components/logo";
 import ResumoDiario from "../../components/extrato";
@@ -30,7 +29,6 @@ export default function Home(){
                 <ResumoDiario/>
                 <Sidebar/>
             </Corpo>
-
         </Page>
         </>
     )
