@@ -5,18 +5,22 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { signIn } from "../../services/signIn";
+import { signUp } from "../../services/signUp";
 
 export default function SigIn(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
 
     async function submit(event) {
         event.preventDefault();
-    
+        if(password !== confirmPassword) {
+            toast('As senhas não coincidem!');
+            return
+        }
         try {
-          const userData = await signIn(email, password);
+          const userData = await signUp(email, password);
           console.log(userData);
           toast('Login realizado com sucesso!!!');
           navigate('/home');
@@ -25,10 +29,10 @@ export default function SigIn(){
           toast('Não foi possível fazer o login!');
         }
       } 
-      function redirect(){
-        console.log('entrou')
-        navigate('/signUp');
-      }
+    function redirect(){
+        navigate('/');
+    }
+
     return (
         <>
         <ToastContainer
@@ -50,11 +54,13 @@ export default function SigIn(){
                 <form onSubmit={submit}>
                     <input label="E-mail" type="text" fullWidth value={email} onChange={e => setEmail(e.target.value)} />
                     <input label="Senha" type="password" fullWidth value={password}     onChange={e => setPassword(e.target.value)} />
-                    <button type="submit">Entrar</button>
-                    <label>Ainda não tem uma conta? </label>
+                    <input label="Senha" type="password" fullWidth value={confirmPassword}     onChange={e => setConfirmPassword(e.target.value)} />
+                    <button type="submit">Inscrever-se</button>
+                    <label>Ja tem uma conta? </label>
                 </form>
-                <button onClick={redirect}>Inscrever-se</button>
+                <button onClick={redirect}>Entrar</button>
                 </Form>
+
             </Corpo>
         </Page>
         </>
@@ -63,7 +69,7 @@ export default function SigIn(){
 
 const Form = styled.div`
     background-color: #334c57;
-    padding-top: 4vh;
+    
     border-radius: 20px;
     b{
         font-size: 2vw;
@@ -81,7 +87,7 @@ const Form = styled.div`
         input{
             width: 80%;
             height: 50px;
-            margin: 3vh 0;
+            margin: 2vh 0;
             border: solid none;
             border: none;
             border-radius: 10px;
@@ -104,7 +110,7 @@ const Form = styled.div`
         }
         label{
             font-size: 1.5vw;
-            margin-top: 3vh;
+            margin-top: 2vh;
             color: #e4e4e5
         }
         button:hover{
@@ -112,13 +118,13 @@ const Form = styled.div`
         }
     }
     button{
-            width: 30%;
+            width: 40%;
             height: 45px;
             margin: 2vh 0;
             background-color: #6780f7;
             border: solid #6780f7;
             border-radius: 10px;
-            font-size: 1.5vw;
+            font-size: 2vw;
             font-weight: 700;
             color: #e4e4e5;
         }
