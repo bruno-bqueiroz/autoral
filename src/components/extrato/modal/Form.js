@@ -5,7 +5,7 @@ import {  toast } from 'react-toastify';
 import { IoCloseSharp } from "react-icons/io5";
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function FormModal({setDate, setIsOpen, setData }){
+export default function FormModal({setDate, setIsOpen, setData, token}){
     const [dataEntrada, setDataEntrada ] = useState('');
     const [dataSaida, setDataSaida ] = useState('');
     const [dataKM, setDataKM ] = useState('');
@@ -17,17 +17,16 @@ export default function FormModal({setDate, setIsOpen, setData }){
       setIsOpen(false);
     }
     async function postDiary(e){
-        console.log(e)
+        
          e.preventDefault();
          console.log(dataDate)
          try {
             
-             const datas = await PostDiaryBydate({dataEntrada, dataSaida, dataKM, dataTempo,dataNViagens, dataDate});
+             const datas = await PostDiaryBydate({dataEntrada, dataSaida, dataKM, dataTempo,dataNViagens, dataDate, token});
              setData(datas);
              setDate(dataDate);
              notify();
              closeModal();
-             
              
          } catch (error) {
              console.log(error);

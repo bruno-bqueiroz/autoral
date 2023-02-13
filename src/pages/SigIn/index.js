@@ -2,24 +2,37 @@ import Page from "../../components/Page";
 import { ToastContainer } from 'react-toastify';
 import Corpo from "../../components/Corpo";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { signIn } from "../../services/signIn";
+import UserContext from "../../contexts/UserContext";
+import { getEnroll } from "../../services/enroll";
 
 export default function SigIn(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { setUserData } = useContext(UserContext);
 
     async function submit(event) {
         event.preventDefault();
     
         try {
           const userData = await signIn(email, password);
-          console.log(userData);
-          toast('Login realizado com sucesso!!!');
-          navigate('/home');
+          setUserData(userData);
+          const token = userData.token;
+            const temEnrollment = await getEnroll(token); 
+            
+            if(temEnrollment[0].name === ''){
+                navigate('/cadastro');
+                toast('Login realizado com sucesso!!!');
+            }else{
+                navigate('/home');
+                toast('Login realizado com sucesso!!!');
+            }
+            
+          
         } catch (err) {
             console.log(err)
           toast('Não foi possível fazer o login!');

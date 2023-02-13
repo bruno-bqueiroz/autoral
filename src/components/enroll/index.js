@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postEnroll, getEnroll } from "../../services/enroll";
-import { useEffect } from "react";
 
-export default function FormEnroll(){
+
+export default function FormEnroll({token}){
+    
     const [form, setForm] = useState({
         ano: "",
         city: "",
@@ -15,9 +16,10 @@ export default function FormEnroll(){
         name: "",
         state: "",
         });
+
         async function get(){
             try {
-                const dataEnroll = await getEnroll();
+                const dataEnroll =  await getEnroll(token);
                 console.log(dataEnroll[0]);
                 setForm({
                 ano: dataEnroll[1].ano,
@@ -32,17 +34,17 @@ export default function FormEnroll(){
                 console.log(error)
             }
         }
-        useEffect(() => {
-            console. log("Isso será executado uma vez!");
-            get();
-            }, []);
-    
-    console.log(form);
-    
-    
+
+
+    useEffect(() => {
+        console. log("Isso será executado uma vez!");
+        get();
+        }, []);
+
+console.log(form);
+        
     const notify = () => toast("Sucesso!!!");
     const errorNotify = () => toast("Erro ao Salvar!");
-    console.log(form)
 
       function handleForm (e) {
         setForm({
@@ -52,7 +54,8 @@ export default function FormEnroll(){
       }
       async function postWithEnroll(){
         try {
-        const datas = await postEnroll(form);
+            console.log(token)
+        const datas = await postEnroll(form, token);
         
         console.log(datas)
         notify();
@@ -68,13 +71,13 @@ export default function FormEnroll(){
                 <h1>Cadastro pessoal</h1>
                 <form>
                     <b>Nome:</b>
-                    <input type="text" name="name" onChange={handleForm} value={form.name}  placeholder="Digite seu nome" required/>
+                    <input type="text" name="name" onChange={handleForm} value={form ? form.name : <></> }  placeholder="Digite seu nome" required/>
                     <b>CPF:</b>
-                    <input type="text" name="cpf" onChange={handleForm} value={form.cpf}  placeholder="Digite seu CPF" required/>
+                    <input type="text" name="cpf" onChange={handleForm} value={form ? form.cpf : <></>}  placeholder="Digite seu CPF" required/>
                     <b>Cidade:</b>
-                    <input type="text" name="city" onChange={handleForm} value={form.city}  placeholder="Digite a Cidade onde trabalha" required/>
+                    <input type="text" name="city" onChange={handleForm} value={form ? form.city : <></>}  placeholder="Digite a Cidade onde trabalha" required/>
                     <b>Estado:</b>
-                    <input type="text" name="state" onChange={handleForm} value={form.state}  placeholder="Em qual estado fica essa cidade" required/>
+                    <input type="text" name="state" onChange={handleForm} value={form ? form.state: <></>}  placeholder="Em qual estado fica essa cidade" required/>
                 </form>
             </Enroll>
             <Pipe></Pipe>
@@ -83,11 +86,11 @@ export default function FormEnroll(){
                 
                 <form >
                     <b>Marca:</b>
-                    <input type="text" name="marca" onChange={handleForm} value={form.marca}  placeholder="Digite a Marca do Veículo" required/>
+                    <input type="text" name="marca" onChange={handleForm} value={form ? form.marca: <></>}  placeholder="Digite a Marca do Veículo" required/>
                     <b>Modelo:</b>
-                    <input type="text" name="modelo" onChange={handleForm} value={form.modelo}  placeholder="Digite o Modelo do Veículo" required/>
+                    <input type="text" name="modelo" onChange={handleForm} value={form ? form.modelo: <></>}  placeholder="Digite o Modelo do Veículo" required/>
                     <b>Ano:</b>
-                    <input type="text" name="ano" onChange={handleForm} value={form.ano}  placeholder="Digite o ano de fabricação do veículo" required/>
+                    <input type="text" name="ano" onChange={handleForm} value={form ? form.ano: <></>}  placeholder="Digite o ano de fabricação do veículo" required/>
                 </form>
                 
                 <input onClick={postWithEnroll} type={"submit"} value="Enviar" className="submit"/>

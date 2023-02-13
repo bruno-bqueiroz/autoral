@@ -4,9 +4,11 @@ import Topo from "../../components/Topo";
 import Corpo from "../../components/Corpo";
 import FormEnroll from "../../components/enroll";
 import { ToastContainer } from 'react-toastify';
+import useToken from "../../hook/useToken";
 
 export default function Enrollment(){
-    
+    const token = useToken();
+
     return (
         <>
         <ToastContainer
@@ -26,7 +28,7 @@ export default function Enrollment(){
                 <Logo/>
             </Topo>
             <Corpo>
-                <FormEnroll/>
+                <FormEnroll token = {token}/>
             </Corpo>
         </Page>
         </>

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import FormModal from "./Form";
 
 
-export default function ModalStyle({setDate, modalIsOpen, setIsOpen, setData}){
+export default function ModalStyle({setDate, modalIsOpen, setIsOpen, setData, token}){
 
        function closeModal() {
          setIsOpen(false);
@@ -19,7 +19,7 @@ export default function ModalStyle({setDate, modalIsOpen, setIsOpen, setData}){
         ariaHideApp={false}
         className="Modal"
     >
-        <FormModal setIsOpen = {setIsOpen} setData = {setData} setDate = {setDate} />
+        <FormModal setIsOpen = {setIsOpen} setData = {setData} setDate = {setDate} token={token} />
         
     </Modal>
     )

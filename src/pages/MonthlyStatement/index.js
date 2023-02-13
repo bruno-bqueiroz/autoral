@@ -1,12 +1,13 @@
-import styled from "styled-components";
 import Page from "../../components/Page";
-import RedirectButtons from "../../components/buttons";
 import Logo from "../../components/logo";
 import { Charts } from "../../components/Grafico1";
 import Topo from "../../components/Topo";
 import Corpo from "../../components/Corpo";
+import useToken from "../../hook/useToken";
 
 export default function MonthlyStatement(){
+    const token = useToken();
+    console.log(token);
     return (
         <>
         <Page>

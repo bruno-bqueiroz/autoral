@@ -7,19 +7,19 @@ import Meta from "./meta";
 import ModalStyle from "./modal/Modal";
 
 
-export default function ResumoDiario(){ 
+export default function ResumoDiario(token){ 
     
     const [date, setDate] = useState(dayjs().format('DD/MM/YYYY'));
     const [data, setData] = useState([]);
-    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);
        }
 
     return (
         <Container>
-            <ModalStyle setDate = {setDate} modalIsOpen = {modalIsOpen} setIsOpen={setIsOpen} setData = {setData} />
-            <Meta date = {date} setDate = {setDate} setData = {setData}/>
+            <ModalStyle setDate = {setDate} modalIsOpen = {modalIsOpen} setIsOpen={setIsOpen} setData = {setData} token={token} />
+            <Meta date = {date} setDate = {setDate} setData = {setData} token={token}/>
             {!data? <span></span>:
             <span>
                 <div>
