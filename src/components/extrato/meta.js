@@ -20,29 +20,8 @@ export default function Meta({date, setDate, setData, token}){
     const notify = () => toast("Sucesso!!!");
     const errorNotify = () => toast("Erro ao Salvar!");
 
-    
-      async function postWithmeta(e){
-        e.preventDefault();
-        const body = {
-            id: dataGoal.id || 0,
-            entrada: dataGoal.entrada,
-            meta
-        }
-        
-        try {
-            console.log(token)
-        const datas = await PostMeta(month, body, token);
-        
-        console.log(datas)
-        notify();
-        } catch (error) {
-            errorNotify();
-            console.log(error);
-        }
-      }
-
-    useEffect(() => {
-            const requisicao = GetGoalByMonth(month, token);
+    function getGoal(){
+        const requisicao = GetGoalByMonth(month, token);
             requisicao.then(response => {
                 setDataGoal({
                 id: response.id,
@@ -57,6 +36,32 @@ export default function Meta({date, setDate, setData, token}){
             requisicao.catch(response=>{
                 console.log(response);
             });
+    }
+    
+      async function postWithmeta(e){
+        e.preventDefault();
+        const body = {
+            id: dataGoal.id || 0,
+            entrada: dataGoal.entrada,
+            meta
+        }
+        
+        try {
+            console.log(token)
+        const datas = await PostMeta(month, body, token);
+        getGoal();
+        
+        
+        console.log(datas)
+        notify();
+        } catch (error) {
+            errorNotify();
+            console.log(error);
+        }
+      }
+
+    useEffect(() => {
+        getGoal();
         }, []);
     
     async function diary(){
