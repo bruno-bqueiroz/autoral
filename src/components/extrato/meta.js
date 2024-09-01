@@ -1,40 +1,64 @@
 import styled from "styled-components";
 import { getDiaryBydate } from "../../services/diary";
+import { getGoal } from "../../services/goals";
+import { useEffect } from "react";
 
-export default function Meta({date, setDate, setData}){
+export default function Meta({ date, data, setDate, setData }) {
 
-    async function diary(){
-    try {
-        const datas = await getDiaryBydate(date);
-            setData(datas);
+  
+    async function diary(newDate) {
+      try {
 
-    } catch (error) {
-            alert(error);
+        const metas = await getGoal();
+        
+        
+        console.log("🚀 ~ diary ~ metaoriginal:", data)
+        setData(metas);
+        
+
+        const datas = await getDiaryBydate(newDate);
+        
+        setData(datas);
+      } catch (error) {
+        return error;
+      }
     }
-}
-
+    
+    useEffect(() => {
+        diary(date);
+      }, [date]);
+  
     return (
-        <Container>
-            <ul>
-                <p>Meta do Mês</p>
-                <b>R$ 4.000,00</b>
-            </ul>
-            <ul> 
-                <p>Faturamento</p>
-                <b>R$ 3.301,00</b>
-            </ul>
-            <ul>
-                <p>Falta para bater a meta</p>
-                <b>R$ 699,00</b>
-            </ul>
-            <ul>
-                <form onInputCapture={()=> diary()}>
-                    <input type="date" value={date} placeholder={date} required onChange={e => setDate(e.target.value)} />
-                </form>
-            </ul>
-        </Container>
-    )
-}
+      <Container>
+        <ul>
+          <p>Meta do Mês</p>
+          <b>R$ {data.meta? data.meta : 0}</b>
+        </ul>
+        <ul>
+          <p>Faturamento</p>
+          <b>R$ 3.301,00</b>
+        </ul>
+        <ul>
+          <p>Falta para bater a meta</p>
+          <b>R$ 699,00</b>
+        </ul>
+        <ul>
+          <form
+            onInputCapture={() => diary(date)} // Passa o valor atualizado
+          >
+            <input
+              type="date"
+              value={date}
+              placeholder={date}
+              required
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </form>
+        </ul>
+      </Container>
+    );
+  }
+  
 
 const Container = styled.span `
     width: 100%;

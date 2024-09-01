@@ -1,8 +1,11 @@
 import api from './api';
 
 export async function getDiaryBydate(date) {
-    const response = await api.get(`/day?date=${date}`);
-    console.log();
+  const userId = 1;
+   const response = await api.get(`/day?date=${date}`);
+   const teste = await api.get(`/week?userId=${userId}`)
+
+      console.log("🚀 ~ getDiaryBydateadadawawdawawawadawwadwad ~ teste:", teste)
       return response.data;
 }
 

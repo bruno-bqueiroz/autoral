@@ -14,19 +14,21 @@ export default function FormEnroll(){
         modelo: "",
         name: "",
         state: "",
+        meta: "",
         });
         async function get(){
             try {
                 const dataEnroll = await getEnroll();
-                console.log(dataEnroll[0]);
+                console.log(dataEnroll);
                 setForm({
-                ano: dataEnroll[1].ano,
+                ano: dataEnroll[2].ano,
                 city: dataEnroll[0].city,
                 cpf: dataEnroll[0].cpf,
-                marca: dataEnroll[1].marca,
-                modelo: dataEnroll[1].modelo,
+                marca: dataEnroll[2].marca,
+                modelo: dataEnroll[2].modelo,
                 name: dataEnroll[0].name,
                 state: dataEnroll[0].state,
+                meta: dataEnroll[1].meta?? 2 ,
                 }); 
             } catch (error) {
                 console.log(error)
@@ -36,9 +38,6 @@ export default function FormEnroll(){
             console. log("Isso será executado uma vez!");
             get();
             }, []);
-    
-    console.log(form);
-    
     
     const notify = () => toast("Sucesso!!!");
     const errorNotify = () => toast("Erro ao Salvar!");
@@ -54,7 +53,6 @@ export default function FormEnroll(){
         try {
         const datas = await postEnroll(form);
         
-        console.log(datas)
         notify();
         } catch (error) {
             errorNotify();
@@ -75,6 +73,8 @@ export default function FormEnroll(){
                     <input type="text" name="city" onChange={handleForm} value={form.city}  placeholder="Digite a Cidade onde trabalha" required/>
                     <b>Estado:</b>
                     <input type="text" name="state" onChange={handleForm} value={form.state}  placeholder="Em qual estado fica essa cidade" required/>
+                    <b>Meta mensal:</b>
+                    <input type="text" name="meta" onChange={handleForm} value={form.meta}  placeholder="Qual sua meta mensal?"/>
                 </form>
             </Enroll>
             <Pipe></Pipe>
@@ -114,7 +114,7 @@ const Enroll = styled.div`
         align-items: center;
         input{
             width: 60%;
-            height: 8vh;
+            height: 6vh;
             margin-bottom: 3vh;
             border: solid 0.1px #a6afaa;
             border-radius: 5px;

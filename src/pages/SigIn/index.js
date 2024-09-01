@@ -17,16 +17,13 @@ export default function SigIn(){
     
         try {
           const userData = await signIn(email, password);
-          console.log(userData);
           toast('Login realizado com sucesso!!!');
           navigate('/home');
         } catch (err) {
-            console.log(err)
           toast('Não foi possível fazer o login!');
         }
       } 
       function redirect(){
-        console.log('entrou')
         navigate('/signUp');
       }
     return (

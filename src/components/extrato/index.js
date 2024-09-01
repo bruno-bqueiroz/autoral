@@ -15,29 +15,35 @@ export default function ResumoDiario(){
     function openModal() {
         setIsOpen(true);
        }
-
+    
+    const saldo = (data.entrada && data.saida ? (data.entrada - data.saida).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0) ;
+    const gasto = (data.saida ? (data.saida).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
+    const fatura = (data.entrada ? (data.entrada).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
+    const pHora = (data.entrada && data.horasTrabalhadas ?(data.entrada / data.horasTrabalhadas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
+    const mediaPKm = (data.entrada && data.KmPercorridos ?(data.entrada/data.KmPercorridos).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
+    const mediaPViagem = (data.entrada && data.NumeroViagens ?(data.entrada/data.NumeroViagens).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
     return (
         <Container>
             <ModalStyle setDate = {setDate} modalIsOpen = {modalIsOpen} setIsOpen={setIsOpen} setData = {setData} />
-            <Meta date = {date} setDate = {setDate} setData = {setData}/>
+            <Meta date = {date} data = {data} setDate = {setDate} setData = {setData}/>
             {!data? <span></span>:
             <span>
                 <div>
                     <p>SALDO</p>
-                    <b>R$ {data.entrada - data.saida},00</b>
+                    <b>{saldo}</b>
                     
                 </div>
                 <div>
                     <p>GASTOS</p>
-                    <b>R$ {data.saida},00</b>
+                    <b>{gasto}</b>
                 </div>
                 <div>
                     <p>FATUROU</p>
-                    <b>R$ {data.entrada},00</b>
+                    <b>{fatura}</b>
                 </div>
                 <div>
                     <p>P/ HORA</p>
-                    <b>R$ {data.entrada / data.horasTrabalhadas},00</b>
+                    <b>{pHora}</b>
                 </div>
                 <div>
                     <p>TEMPO</p>
@@ -49,11 +55,11 @@ export default function ResumoDiario(){
                 </div>
                 <div>
                     <p>MÉDIA P/ KM</p>
-                    <b>R$ {(data.entrada/data.KmPercorridos).toFixed(2)}</b>
+                    <b>{mediaPKm}</b>
                 </div>
                 <div>
                     <p>MÉDIA P/ VIAGEM</p>
-                    <b>R$ {(data.entrada/data.NumeroViagens).toFixed(2)}</b>
+                    <b>{mediaPViagem}</b>
                 </div>
                 <div onClick={openModal}><p>ENTRADA</p><b><AiFillFolderAdd/></b></div>
             </span>}
@@ -110,7 +116,7 @@ const Container = styled.div`
         position: relative;
         box-shadow: 
             0 0 0 1px #f9f9f9,
-            0 0 0 2px #e0c5ff,
+            0 0 0 2px #e0c5f9,
             0 0 3px 3px #553e27,
             0 0 5px 5px #6780f7;
     }
