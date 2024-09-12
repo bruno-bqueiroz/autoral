@@ -3,7 +3,6 @@ import api from './api';
 export async function getWeekById(userId) {
    const response = await api.get(`/week?userId=${userId}`)
 
-      console.log("🚀 ~ getWeekById ~ response:", response)
       return response.data;
 }
 

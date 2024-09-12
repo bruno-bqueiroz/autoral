@@ -21,7 +21,6 @@ export async function postEnroll(form) {
   export async function getEnroll() {
     const userId = 4;
     const response = await api.get(`/enroll?userId=${userId}`);
-    console.log("🚀 ~ getEnroll ~ response:", response)
       return response.data;
     
     

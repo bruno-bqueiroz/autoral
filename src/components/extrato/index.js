@@ -18,7 +18,7 @@ export default function ResumoDiario(){
     
     const saldo = (data.entrada && data.saida ? (data.entrada - data.saida).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0) ;
     const gasto = (data.saida ? (data.saida).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
-    const fatura = (data.entrada ? (data.entrada).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
+    const fatura = (data.entrada && data.saida ? (data.entrada).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
     const pHora = (data.entrada && data.horasTrabalhadas ?(data.entrada / data.horasTrabalhadas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
     const mediaPKm = (data.entrada && data.KmPercorridos ?(data.entrada/data.KmPercorridos).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
     const mediaPViagem = (data.entrada && data.NumeroViagens ?(data.entrada/data.NumeroViagens).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 0);
@@ -51,7 +51,7 @@ export default function ResumoDiario(){
                 </div>
                 <div>
                     <p>KM RODADO</p>
-                    <b>{data.KmPercorridos}</b>
+                    <b>{data.KmPercorridos ? data.KmPercorridos : 0}</b>
                 </div>
                 <div>
                     <p>MÉDIA P/ KM</p>

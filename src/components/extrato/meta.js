@@ -12,7 +12,6 @@ export default function Meta({ date, data, setDate, setData }) {
         const metas = await getGoal();
         
         
-        console.log("🚀 ~ diary ~ metaoriginal:", data)
         setData(metas);
         
 
@@ -27,6 +26,7 @@ export default function Meta({ date, data, setDate, setData }) {
     useEffect(() => {
         diary(date);
       }, [date]);
+
   
     return (
       <Container>
@@ -36,11 +36,11 @@ export default function Meta({ date, data, setDate, setData }) {
         </ul>
         <ul>
           <p>Faturamento</p>
-          <b>R$ 3.301,00</b>
+          <b>R$ {data.entrada? data.entrada : 0}</b>
         </ul>
         <ul>
           <p>Falta para bater a meta</p>
-          <b>R$ 699,00</b>
+          <b>R$ {data.entrada && data.meta? data.meta -  data.entrada: 0}</b>
         </ul>
         <ul>
           <form

@@ -19,7 +19,6 @@ export default function FormEnroll(){
         async function get(){
             try {
                 const dataEnroll = await getEnroll();
-                console.log(dataEnroll);
                 setForm({
                 ano: dataEnroll[2].ano,
                 city: dataEnroll[0].city,
@@ -31,7 +30,6 @@ export default function FormEnroll(){
                 meta: dataEnroll[1].meta?? 2 ,
                 }); 
             } catch (error) {
-                console.log(error)
             }
         }
         useEffect(() => {
@@ -41,7 +39,6 @@ export default function FormEnroll(){
     
     const notify = () => toast("Sucesso!!!");
     const errorNotify = () => toast("Erro ao Salvar!");
-    console.log(form)
 
       function handleForm (e) {
         setForm({
@@ -56,7 +53,6 @@ export default function FormEnroll(){
         notify();
         } catch (error) {
             errorNotify();
-            console.log(error);
         }
       }
       

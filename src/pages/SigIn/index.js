@@ -17,6 +17,7 @@ export default function SigIn(){
     
         try {
           const userData = await signIn(email, password);
+          localStorage.setItem("token", userData.token);
           toast('Login realizado com sucesso!!!');
           navigate('/home');
         } catch (err) {

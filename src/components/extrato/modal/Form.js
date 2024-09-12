@@ -18,7 +18,6 @@ export default function FormModal({setDate, setIsOpen, setData }){
     }
     async function postDiary(e){
          e.preventDefault();
-         console.log(dataDate)
          try {
             
              const datas = await PostDiaryBydate({dataEntrada, dataSaida, dataKM, dataTempo,dataNViagens, dataDate});
@@ -29,7 +28,6 @@ export default function FormModal({setDate, setIsOpen, setData }){
              
              
          } catch (error) {
-             console.log(error);
          }
     }
     return (

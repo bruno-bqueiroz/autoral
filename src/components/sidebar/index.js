@@ -37,7 +37,6 @@ export default function Sidebar() {
         const fetchData = async () => {
             try {
                 const response = await getWeekById(1); // Passe o userId correto aqui
-                console.log("🚀 ~ fetchData ~ response:", response)
                 const dados = response;
                 const ganhos = dados.reduce((acc, item) => acc + item.entrada, 0);
                 const gastos = dados.reduce((acc, item) => acc + item.saida, 0);
@@ -104,13 +103,16 @@ export default function Sidebar() {
                     <b>R$ {totalGastos.toFixed(2)}</b>
                 </span>
             </ul>
-            <PieWrapper>
-                <Pie data={pieData} />
-            </PieWrapper>
+            
             
         </Container>
     );
 }
+
+
+//              <PieWrapper>
+//                 <Pie data={pieData} />
+//              </PieWrapper>
 
 const Container = styled.div`
     width: 100%;
